@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input, select,textarea {
+    @apply px-4 py-1 rounded-lg border border-sky-600 text-sm bg-sky-900 outline-0;
+}
+
+.AccordionItem{
+    .text-large{
+        @apply text-2xl text-white;
+    }
+    .text-small{
+        @apply text-lg text-white;
+    }
+}

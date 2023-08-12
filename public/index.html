@@ -1,0 +1,243 @@
+<html lang="en">
+<head>
+    <title>No Code Node</title>
+    <link rel="stylesheet" href="/style.scss"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-sky-50" id="app">
+<div class="w-full flex flex-col items-center justify-center p-5 mb-4">
+    <h1 class="text-5xl text-sky-700">No Code Node</h1>
+    <h2 class="text-3xl text-sky-700">Details</h2>
+    <form action="/routes/api/add" method="post">
+        <div
+                class="border grid grid-cols-3 items-start justify-items-start text-lg rounded p-3 mt-2 gap-3"
+        >
+            <div>
+                <label for="title" title="Page and swagger title"
+                >Page Title:
+                </label>
+                <input name="title" id="title" class="" value="TestPage"/>
+            </div>
+            <div>
+                <label for="description" title="Swagger description"
+                >Description:
+                </label>
+                <input
+                        name="description"
+                        id="description"
+                        value="TestDescription"
+                />
+            </div>
+            <div>
+                <label for="host" title="Swagger host">Host: </label>
+                <input name="host" id="host" value="localhost:81"/>
+            </div>
+            <div class="col-span-3">
+                <h4 class="text-xl">Database Connection:</h4>
+                <label
+                >mongodb+srv://
+                    <input
+                            name="db[username]"
+                            placeholder="Database username"
+                            class="label-input"
+                            value="erdodo"
+                    />:
+                    <input
+                            name="db[password]"
+                            type="password"
+                            placeholder="Database password"
+                            class="label-input"
+                            value="Erdo112233."
+                    />@
+                    <input
+                            name="db[host]"
+                            placeholder="Database host"
+                            value="nocodedb.sgb5kwt.mongodb.net"
+                            class="label-input"
+                    />
+                    /?retryWrites=true&w=majority</label
+                >
+            </div>
+            <div>
+                <label>DB Name: </label>
+                <input name="db[name]" value="nocodetest"/>
+            </div>
+        </div>
+        <div class="flex gap-4 items-center my-2">
+            <h3 class="text-2xl text-sky-700">Routes</h3>
+            <button
+                    type="button"
+                    class="inline-block bg-sky-500 rounded p-2 text-white"
+                    @click="newRoutes"
+            >
+                Add Route
+            </button>
+        </div>
+        <!-- Routes -->
+        <div
+                v-for="(i,k) in routes"
+                class="flex flex-row items-start justify-items-start text-lg gap-4"
+        >
+            <!-- Route Detail -->
+            <div class="flex flex-col border rounded p-3 mt-2">
+                <h3 class="text-2xl mb-3">Route Details</h3>
+                <label>Url:</label>
+                <input
+                        :name="'routes['+k+'][url]'"
+                        type="text"
+                        required
+                        value="/test"
+                />
+                <label>Method:</label>
+                <select :name="'routes['+k+'][method]'" required value="get">
+                    <option value="get">GET (Find)</option>
+                    <option value="post">POST (Insert Many)</option>
+                    <option value="put">PUT (Update Many)</option>
+                    <option value="delete">DELETE (Delete Many)</option>
+                </select>
+                <label class="mt-2">Tags:</label>
+                <input
+                        :name="'routes['+k+'][tags]'"
+                        type="text"
+                        required
+                        value="test"
+                />
+                <label class="mt-2">Description:</label>
+                <input :name="'routes['+k+'][description]'" type="text"/>
+                <label class="mt-2">Summary:</label>
+                <input :name="'routes['+k+'][summary]'" type="text"/>
+            </div>
+            <!-- Route Parameters -->
+            <div class="border rounded p-3 mt-2 w-full">
+                <h3 class="text-2xl mb-3">Parameters</h3>
+                <div
+                        v-for="(prm,key) in i.parameters"
+                        :key="prm"
+                        class="mb-2 flex flex-col border-b-2 pb-2"
+                >
+                    <span>{{ key + 1 }}. Parameter</span>
+                    <label>Name:</label>
+                    <input
+                            :name="'routes['+k+'][parameters]['+key+'][name]'"
+                            required
+                    />
+
+                    <label>Description:</label>
+                    <textarea
+                            :name="'routes['+k+'][parameters]['+key+'][description]'"
+                    ></textarea>
+                    <div>
+                        <label
+                                :for="'routes['+k+'][parameters]['+key+'][required]'"
+                                class="mr-2"
+                        >Required:</label
+                        >
+                        <input
+                                :name="'routes['+k+'][parameters]['+key+'][required]'"
+                                type="checkbox"
+                                :id="'routes['+k+'][parameters]['+key+'][required]'"
+                        />
+                    </div>
+                    <label>In:</label>
+                    <select :name="'routes['+k+'][parameters]['+key+'][in]'" required>
+                        <option value="path">Path</option>
+                        <option value="query">Query</option>
+                        <option value="header">Header</option>
+                        <option value="body">Body</option>
+                        <option value="formData">Form Data</option>
+                    </select>
+                    <label>Type:</label>
+                    <input :name="'routes['+k+'][parameters]['+key+'][type]'"/>
+                </div>
+                <button
+                        @click="newParams(k)"
+                        type="button"
+                        class="w-[230px] inline-block bg-sky-500 rounded p-2 text-white"
+                >
+                    Add
+                </button>
+            </div>
+            <!-- Route Responses -->
+            <div class="border rounded p-3 mt-2 w-full">
+                <h3 class="text-2xl mb-3">Responses</h3>
+                <div
+                        v-for="(prm,key) in i.responses"
+                        :key="prm"
+                        class="mb-2 flex flex-col border-b-2 pb-2"
+                >
+                    <span>{{ key + 1 }}. Responses</span>
+                    <label>Code:</label>
+                    <input
+                            :name="'routes['+k+'][responses.js]['+key+'][code]'"
+                            type="number"
+                            required
+                    />
+
+                    <label>Description:</label>
+                    <textarea
+                            :name="'routes['+k+'][responses.js]['+key+'][description]'"
+                    ></textarea>
+
+                    <label :for="'schema'+key">Schema:</label>
+                    <textarea
+                            :name="'routes['+k+'][responses.js]['+key+'][schema]'"
+                    ></textarea>
+                </div>
+                <button
+                        @click="newResponses(k)"
+                        type="button"
+                        class="w-[230px] inline-block bg-sky-500 rounded p-2 text-white"
+                >
+                    Add
+                </button>
+            </div>
+        </div>
+        <button
+                class="bg-green-500 w-full inline-block rounded p-2 mt-3 text-white"
+        >
+            Save
+        </button>
+    </form>
+</div>
+</body>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+
+
+    const {createApp, ref} = Vue;
+
+
+    createApp({
+        setup() {
+            const routes = ref([
+                {
+                    parameters: [],
+                    responses: [],
+                },
+            ]);
+            import("/../output/config.json").then((res) => {
+                console.log(res.json())
+            })
+            const newParams = (id) => {
+                routes.value[id].parameters.push({});
+            };
+            const newResponses = (id) => {
+                routes.value[id].responses.push({});
+            };
+            const newRoutes = () => {
+                routes.value.push({
+                    parameters: [],
+                    responses: [],
+                });
+            };
+            return {
+                newParams,
+                newResponses,
+                routes,
+                newRoutes,
+            };
+        },
+    }).mount("#app");
+</script>
+</html>

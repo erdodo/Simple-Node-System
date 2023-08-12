@@ -1,0 +1,23 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+input {
+  border-radius: 10px;
+  border: 1px solid #3182ce;
+  padding: 5px 10px !important;
+}
+input:focus, input:active, input:focus-within {
+  outline: 0;
+  border: 2px solid #3182ce;
+}
+
+.label-input {
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0px 5px !important;
+}
+
+/*# sourceMappingURL=style.css.map */

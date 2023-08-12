@@ -1,0 +1,27 @@
+{
+  "title": "TestPage",
+  "description": "TestDescription",
+  "host": "localhost:81",
+  "db": {
+    "username": "erdodo",
+    "password": "Erdo112233.",
+    "host": "nocodedb.sgb5kwt.mongodb.net",
+    "name": "nocodetest"
+  },
+  "routes": [
+    {
+      "url": "/test",
+      "method": "post",
+      "tags": "test",
+      "description": "",
+      "summary": ""
+    },
+    {
+      "url": "/test",
+      "method": "get",
+      "tags": "test",
+      "description": "",
+      "summary": ""
+    }
+  ]
+}

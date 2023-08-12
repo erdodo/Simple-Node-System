@@ -114,3 +114,4 @@ dist
 /config/
 .vercel
 /.vercel/
+/.idea/

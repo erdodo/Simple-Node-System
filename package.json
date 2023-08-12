@@ -1,0 +1,39 @@
+{
+  "name": "no-code-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev:backend": "npm run swagger-autogen &&  nodemon app.js",
+    "start:backend": "node app.js",
+    "test:output": "node output/app.js",
+    "swagger-autogen": "node config/swagger-generator.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "and": "^0.0.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "jsonschema": "^1.4.1",
+    "mime": "^3.0.0",
+    "mongodb": "^5.7.0",
+    "nodemon": "^2.0.22",
+    "swagger-autogen": "^2.23.5",
+    "swagger-ui-express": "^5.0.0",
+    "uuid": "^9.0.0",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "json-schema-generator": "^2.0.6",
+    "postcss": "^8.4.27",
+    "prettier": "3.0.1",
+    "tailwindcss": "^3.3.3"
+  }
+}
